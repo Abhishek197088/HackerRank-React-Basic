@@ -25,8 +25,9 @@ const languageOptions = [
 ];
 
 function App() {
-  const [country, setCountry] = useState('');
-  const [language, setLanguage] = useState('');
+  // Default values loaded on first render
+  const [country, setCountry] = useState(countryOptions[0]);   // USA
+  const [language, setLanguage] = useState(languageOptions[0]); // English
 
   const handleCountryChange = (e) => {
     setCountry(e.target.value);
@@ -39,23 +40,40 @@ function App() {
   return (
     <div>
       <h8k-navbar header={title}></h8k-navbar>
+
       <div className="layout-row align-items-center justify-content-center mt-50">
         <section className="layout-column">
+
           <div data-testid="country-options">
-            <Dropdown options={countryOptions} labelText={'Select Country'} onChange={handleCountryChange}/>
-          </div >
-          <div data-testid="language-options">
-            <Dropdown options={languageOptions} labelText={'Select Language'} onChange={handleLanguageChange}/>
+            <Dropdown
+              options={countryOptions}
+              labelText="Select Country"
+              value={country}
+              onChange={handleCountryChange}
+            />
           </div>
+
+          <div data-testid="language-options">
+            <Dropdown
+              options={languageOptions}
+              labelText="Select Language"
+              value={language}
+              onChange={handleLanguageChange}
+            />
+          </div>
+
           <label className="mt-50 text-align-center">
             Final Selections:
           </label>
+
           <label className="mt-10 finalText" data-testid="country-selected">
             Country Selected: {country}
           </label>
+
           <label className="mt-10 finalText" data-testid="language-selected">
             Language Selected: {language}
           </label>
+
         </section>
       </div>
     </div>
